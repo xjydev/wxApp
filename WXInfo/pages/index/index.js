@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var titleStr = "手机设备信息";
 Page({
   data: {
     
@@ -19,6 +19,7 @@ Page({
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
+      titleStr = app.globalData.userInfo.nickName + "的手机设备信息",
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
@@ -27,6 +28,7 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
+        titleStr = res.userInfo.nickName + "的手机设备信息",
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -37,6 +39,7 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
+          titleStr = res.userInfo.nickName + "的手机设备信息",
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -94,14 +97,9 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    // shareData: {
-    //   title: userInfo.nickName + '的手机',
-    //   desc: '自定义分享描述',
-    //   path: '/page/API/pages/share/share'
-    // }
     
     return {
-      title: "手机设备信息",
+      title: titleStr,
       desc:"信息来自微信小程序“手机设备信息”",
       path:"/pages/index/index",
       success: function (res) {

@@ -66,7 +66,7 @@
             <view class="weui-label">屏幕宽度</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="{{systemInfo.windowWidth}}"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="{{systemInfo.windowWidth}}（{{systemInfo.windowWidth*systemInfo.pixelRatio}}像素）"></input>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -74,7 +74,7 @@
             <view class="weui-label">屏幕高度</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="{{systemInfo.windowHeight}}"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="{{systemInfo.windowHeight}}（{{systemInfo.windowHeight*systemInfo.pixelRatio}}像素）"></input>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -82,7 +82,7 @@
             <view class="weui-label">像素比</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="{{systemInfo.pixelRatio}}"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" placeholder="未获取" value="1 : {{systemInfo.pixelRatio}}"></input>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
