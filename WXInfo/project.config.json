@@ -26,8 +26,21 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "分享小卡片",
+					"pathName": "pages/index/index",
+					"query": "name=元&brand=undefined&model=iPhone 5",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "F6MoNSLclLsf05cHvH_EJH46PIj7ZVVGKxcd5g21JNQ@cr4dev",
+						"shareKey": "_Bt_uI_W07HcMMO0WpV6Lx-ZL3_FvCfd-9OhpDiPmLg1n9B-anl7Vvx-_mdkOiX8q8OYgoiJcokWMcFbm818Uw~~"
+					}
+				}
+			]
 		}
 	}
 }

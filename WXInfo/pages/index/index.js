@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var titleStr = "手机设备信息";
+var shareDesc = "信息来自微信小程序“手机设备信息”";
 Page({
   data: {
     
@@ -10,6 +11,7 @@ Page({
     hasNetworkType: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     systemInfo: {},
+    otherInfo:null,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -17,9 +19,9 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    console.log(options);
     if (app.globalData.userInfo) {
-      titleStr = app.globalData.userInfo.nickName + "的手机设备信息",
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
@@ -28,7 +30,6 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        titleStr = res.userInfo.nickName + "的手机设备信息",
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
@@ -39,7 +40,6 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
-          titleStr = res.userInfo.nickName + "的手机设备信息",
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -58,6 +58,11 @@ Page({
     //   }
     // })
     this.getNetworkType();
+    if (options) {
+      this.setData({
+        otherInfo: options
+      })
+    }
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -84,7 +89,6 @@ Page({
     var that = this
     wx.getSystemInfo({
       success: function (res) {
-          
         that.setData({
           systemInfo: res,
         })
@@ -97,11 +101,18 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    
+    var userInfo = this.data.userInfo;
+    var systemInfo = this.data.systemInfo;
+    if (userInfo.nickName){
+      titleStr = userInfo.nickName + "的手机与你PK"
+    }
+    var path = "/pages/index/index?name=" + userInfo.nickName + "&brand=" + systemInfo.vrand + "&model=" + systemInfo.model;
+    console.log(path)
     return {
       title: titleStr,
-      desc:"信息来自微信小程序“手机设备信息”",
-      path:"/pages/index/index",
+      desc: shareDesc,
+      path:path ,
+     
       success: function (res) {
         wx.showToast({
           title: "转发成功",
